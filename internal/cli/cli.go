@@ -13,12 +13,17 @@ func Execute() {
 		Short: "Professional payload testing tool for bug bounty hunters",
 		Long: `PayloadGo is a professional-grade payload testing tool designed for bug bounty hunters.
 It provides concurrent testing, intelligent response analysis, and comprehensive reporting.`,
+		Run: func(cmd *cobra.Command, args []string) {
+			// If no subcommand is provided, show the interactive menu
+			commands.RunMenu()
+		},
 	}
 
 	// Add subcommands
 	rootCmd.AddCommand(commands.NewFuzzCommand())
 	rootCmd.AddCommand(commands.NewScanCommand())
 	rootCmd.AddCommand(commands.NewReportCommand())
+	rootCmd.AddCommand(commands.NewMenuCommand())
 
 	// Global flags
 	rootCmd.PersistentFlags().StringP("config", "c", "", "config file (default is $HOME/.payloadgo.yaml)")

