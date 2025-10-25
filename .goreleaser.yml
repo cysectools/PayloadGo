@@ -1,0 +1,275 @@
+# GoReleaser configuration for PayloadGo
+project_name: payloadgo
+
+builds:
+  - id: payloadgo
+    binary: payloadgo
+    main: ./cmd/payloadgo
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - id: payloadgo
+    builds:
+      - payloadgo
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+      - CHANGELOG.md
+      - docs/
+      - examples/
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+  algorithm: sha256
+
+snapshot:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  checksum:
+    name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^build:'
+
+dockers:
+  - image_templates:
+      - "ghcr.io/{{ .Repository.Owner }}/payloadgo:{{ .Version }}"
+      - "ghcr.io/{{ .Repository.Owner }}/payloadgo:latest"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }} - Enterprise vulnerability testing platform
+      - --label=org.opencontainers.image.url=https://github.com/{{ .Repository.Owner }}/{{ .Repository.Name }}
+      - --label=org.opencontainers.image.source=https://github.com/{{ .Repository.Owner }}/{{ .Repository.Name }}
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ .Date }}
+      - --label=org.opencontainers.image.revision={{ .Commit }}
+      - --label=org.opencontainers.image.licenses=MIT
+    goos: linux
+    goarch: amd64
+
+brews:
+  - name: payloadgo
+    description: "Enterprise vulnerability testing platform"
+    homepage: "https://github.com/{{ .Repository.Owner }}/{{ .Repository.Name }}"
+    url: "https://github.com/{{ .Repository.Owner }}/{{ .Repository.Name }}/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    license: "MIT"
+    skip_upload: auto
+
+nfpms:
+  - id: payloadgo
+    builds:
+      - payloadgo
+    homepage: "https://github.com/{{ .Repository.Owner }}/{{ .Repository.Name }}"
+    description: "Enterprise vulnerability testing platform"
+    license: "MIT"
+    formats:
+      - deb
+      - rpm
+    dependencies:
+      - postgresql-client
+    contents:
+      - src: README.md
+        dst: /usr/share/doc/payloadgo/README.md
+      - src: LICENSE
+        dst: /usr/share/doc/payloadgo/LICENSE
+      - src: CHANGELOG.md
+        dst: /usr/share/doc/payloadgo/CHANGELOG.md
+    scripts:
+      preinstall: scripts/preinstall.sh
+      postinstall: scripts/postinstall.sh
+      preremove: scripts/preremove.sh
+      postremove: scripts/postremove.sh
+
+signs:
+  - artifacts: checksum
+    signature: "${artifact}.sig"
+    args:
+      - "--batch"
+      - "--yes"
+      - "--detach-sign"
+      - "--armor"
+      - "${artifact}"
+
+announce:
+  skip: "{{gt .Patch 0}}"
+  twitter:
+    enabled: true
+    message_template: "🚀 PayloadGo {{.Version}} is out! Enterprise vulnerability testing platform with advanced security features. Download: {{.URL}}"
+  reddit:
+    enabled: true
+    subreddit: "netsec"
+    title: "PayloadGo {{.Version}} - Enterprise Vulnerability Testing Platform"
+    message: |
+      PayloadGo {{.Version}} is now available! 
+
+      🛡️ **Enterprise Features:**
+      - Multi-tenant architecture with RBAC
+      - Advanced encryption and secrets management
+      - Immutable audit logging and evidence store
+      - Adaptive concurrency and circuit breakers
+      - Confidence scoring and false-positive reduction
+      - Comprehensive reporting and PoC generation
+      - Full observability with metrics and tracing
+
+      🔗 **Download:** {{.URL}}
+      📖 **Documentation:** https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/wiki
+      🐛 **Issues:** https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/issues
+
+      Perfect for security teams, bug bounty hunters, and penetration testers!
+  discord:
+    enabled: true
+    webhook: "{{.Env.DISCORD_WEBHOOK}}"
+    message_template: |
+      🚀 **PayloadGo {{.Version}}** is now available!
+      
+      🛡️ Enterprise vulnerability testing platform with advanced security features
+      
+      🔗 Download: {{.URL}}
+      📖 Docs: https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/wiki
+      
+      #security #vulnerability #testing #enterprise
+  slack:
+    enabled: true
+    webhook: "{{.Env.SLACK_WEBHOOK}}"
+    message_template: |
+      🚀 PayloadGo {{.Version}} is out!
+      
+      🛡️ Enterprise vulnerability testing platform
+      🔗 {{.URL}}
+      📖 https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/wiki
+
+release:
+  github:
+    owner: "{{.Repository.Owner}}"
+    name: "{{.Repository.Name}}"
+    draft: false
+    prerelease: "{{gt .Patch 0}}"
+    mode: replace
+    header: |
+      ## 🚀 PayloadGo {{.Version}}
+      
+      Enterprise vulnerability testing platform with advanced security features.
+      
+      ### 🛡️ What's New
+      - Enhanced security and compliance features
+      - Improved performance and reliability
+      - New detection capabilities
+      - Better reporting and analytics
+      
+      ### 📦 Downloads
+      {{range .Artifacts}}
+      - [{{.Name}}]({{.URL}}) ({{.Size}})
+      {{end}}
+      
+      ### 🔗 Links
+      - [Documentation](https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/wiki)
+      - [Changelog](https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/blob/main/CHANGELOG.md)
+      - [Issues](https://github.com/{{.Repository.Owner}}/{{.Repository.Name}}/issues)
+      
+      ### 🛠️ Installation
+      
+      **Using Homebrew (macOS):**
+      ```bash
+      brew install payloadgo
+      ```
+      
+      **Using Docker:**
+      ```bash
+      docker pull ghcr.io/{{.Repository.Owner}}/payloadgo:latest
+      ```
+      
+      **Manual Installation:**
+      1. Download the appropriate binary for your platform
+      2. Make it executable: `chmod +x payloadgo`
+      3. Move to your PATH: `sudo mv payloadgo /usr/local/bin/`
+      
+      ### 🚀 Quick Start
+      ```bash
+      # Basic scan
+      payloadgo scan "http://target.com/search?q=TEST"
+      
+      # Interactive fuzzing
+      payloadgo fuzz "http://target.com/search?q=TEST" -i
+      
+      # Generate report
+      payloadgo report results.json -f html -o report.html
+      ```
+      
+      ### 🛡️ Security
+      This release has been security tested and includes:
+      - Encrypted data storage
+      - Secure authentication
+      - Audit logging
+      - Vulnerability scanning
+      
+      ### 📊 Statistics
+      - **Total Downloads:** {{.Count}}
+      - **Release Date:** {{.Date}}
+      - **Commit:** {{.Commit}}
+      
+      ---
+      
+      **⚠️ Disclaimer:** This tool is for authorized testing only. Always ensure you have permission before testing any target.
+
+blob:
+  - provider: azure
+    container: releases
+    folder: "{{.ProjectName}}/{{.Version}}"
+    account_name: "{{.Env.AZURE_STORAGE_ACCOUNT}}"
+    account_key: "{{.Env.AZURE_STORAGE_KEY}}"
+    files:
+      - "{{.ArtifactName}}"
+      - "{{.ArtifactName}}.sig"
+      - "{{.ArtifactName}}.checksum"
+
+s3:
+  - bucket: payloadgo-releases
+    region: us-east-1
+    folder: "{{.ProjectName}}/{{.Version}}"
+    files:
+      - "{{.ArtifactName}}"
+      - "{{.ArtifactName}}.sig"
+      - "{{.ArtifactName}}.checksum"
+
+gcs:
+  - bucket: payloadgo-releases
+    folder: "{{.ProjectName}}/{{.Version}}"
+    files:
+      - "{{.ArtifactName}}"
+      - "{{.ArtifactName}}.sig"
+      - "{{.ArtifactName}}.checksum"
+
+artifactory:
+  - target: "{{.ProjectName}}/{{.Version}}/{{.ArtifactName}}"
+    username: "{{.Env.ARTIFACTORY_USERNAME}}"
+    password: "{{.Env.ARTIFACTORY_PASSWORD}}"
+    url: "{{.Env.ARTIFACTORY_URL}}"
+    checksum: true
+    signature: true

