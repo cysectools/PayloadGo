@@ -3,26 +3,61 @@ package cli
 import (
 	"payloadgo/internal/commands"
 	"payloadgo/internal/config"
+	"payloadgo/internal/ui"
 
 	"github.com/spf13/cobra"
 )
 
 func Execute() {
+	// Create visual CLI instance
+	visual := ui.NewVisualCLI()
+
 	rootCmd := &cobra.Command{
 		Use:   "payloadgo",
-		Short: "Professional payload testing tool for bug bounty hunters",
-		Long: `PayloadGo is a professional-grade payload testing tool designed for bug bounty hunters.
-It provides concurrent testing, intelligent response analysis, and comprehensive reporting.`,
+		Short: "🚀 PayloadGo Enterprise - Security Testing Platform",
+		Long: `PayloadGo Enterprise is a comprehensive, enterprise-grade security testing platform.
+
+🔒 Enterprise Features:
+  • Multi-tenant architecture with RBAC
+  • ML-powered confidence scoring
+  • Comprehensive reporting (Executive, Technical, SARIF)
+  • Real-time monitoring and metrics
+  • Interactive CLI and Web UI
+  • Enterprise integrations and API
+
+🛡️ Safety & Ethics:
+  • Safe-by-default design
+  • Ethical guidelines enforcement
+  • Emergency kill switch
+  • Immutable audit logging
+
+📊 Advanced Capabilities:
+  • Adaptive concurrency control
+  • Circuit breaker protection
+  • False positive reduction
+  • Browser instrumentation
+  • Correlation engine`,
 		Run: func(cmd *cobra.Command, args []string) {
-			// If no subcommand is provided, show the interactive menu
+			// Show enhanced banner and welcome
+			visual.ShowBanner()
+			visual.ShowWelcome()
+
+			// Show main menu
+			visual.ShowMainMenu()
+
+			// For now, fall back to the original menu
+			// In a full implementation, this would handle the menu selection
 			commands.RunMenu()
 		},
 	}
 
 	// Add subcommands
 	rootCmd.AddCommand(commands.NewFuzzCommand())
-	rootCmd.AddCommand(commands.NewScanCommand())
+	rootCmd.AddCommand(commands.NewSimpleScanCommand()) // Enhanced visual scan
 	rootCmd.AddCommand(commands.NewReportCommand())
+	rootCmd.AddCommand(commands.NewServerCommand())     // Web server
+	rootCmd.AddCommand(commands.NewVisualHelpCommand()) // Enhanced help
+	rootCmd.AddCommand(commands.NewVersionCommand())    // Version information
 	rootCmd.AddCommand(commands.NewMenuCommand())
 
 	// Global flags
