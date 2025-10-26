@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"fmt"
+
 	"payloadgo/internal/commands"
 	"payloadgo/internal/config"
 	"payloadgo/internal/ui"
@@ -42,12 +44,53 @@ func Execute() {
 			visual.ShowBanner()
 			visual.ShowWelcome()
 
-			// Show main menu
-			visual.ShowMainMenu()
+			// Interactive menu loop
+			for {
+				// Show main menu
+				visual.ShowMainMenu()
 
-			// For now, fall back to the original menu
-			// In a full implementation, this would handle the menu selection
-			commands.RunMenu()
+				// Get user choice
+				var choice string
+				fmt.Scanln(&choice)
+
+				// Handle menu selection
+				switch choice {
+				case "1":
+					visual.ShowInfo("Starting Quick Scan...")
+					visual.ShowInfo("Please run: payloadgo scan <target> --quick")
+				case "2":
+					visual.ShowInfo("Starting Advanced Scan...")
+					visual.ShowInfo("Please run: payloadgo scan <target> --advanced")
+				case "3":
+					visual.ShowInfo("Interactive mode - currently uses guided workflows in each command")
+				case "4":
+					visual.ShowInfo("Starting Web Dashboard...")
+					visual.ShowInfo("Please run: payloadgo server --web")
+				case "5":
+					visual.ShowInfo("Generating Report...")
+					visual.ShowInfo("Please run: payloadgo report")
+				case "6":
+					visual.ShowInfo("View Findings - feature coming soon")
+				case "7":
+					visual.ShowInfo("Metrics - feature coming soon")
+				case "8":
+					visual.ShowInfo("Settings - feature coming soon")
+				case "9":
+					visual.ShowHelp()
+					visual.ShowSuccess("Press Enter to return to main menu...")
+					var input string
+					fmt.Scanln(&input)
+				case "10":
+					visual.ShowGoodbye()
+					return
+				default:
+					visual.ShowError("Invalid choice. Please enter a number between 1-10.")
+				}
+
+				if choice != "10" {
+					fmt.Println()
+				}
+			}
 		},
 	}
 
@@ -56,6 +99,7 @@ func Execute() {
 	rootCmd.AddCommand(commands.NewSimpleScanCommand()) // Enhanced visual scan
 	rootCmd.AddCommand(commands.NewReportCommand())
 	rootCmd.AddCommand(commands.NewServerCommand())     // Web server
+	rootCmd.AddCommand(commands.NewFindingsCommand())   // Findings view
 	rootCmd.AddCommand(commands.NewVisualHelpCommand()) // Enhanced help
 	rootCmd.AddCommand(commands.NewVersionCommand())    // Version information
 	rootCmd.AddCommand(commands.NewMenuCommand())
